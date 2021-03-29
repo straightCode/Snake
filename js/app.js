@@ -1,7 +1,6 @@
 'use strict'
 
 const box = 30;
-const border = 3;
 const scoreValueEl = document.getElementById('scoreValue');
 const offsetX = document.querySelector('.border').offsetLeft;
 const offsetY = document.querySelector('.border').offsetHeight;
@@ -13,6 +12,8 @@ let direction = 'down';
 let snake = [];
 let foodCords = {}
 
+document.addEventListener('keydown', selectDirection);
+
 function createSnakeBlock(cords) {
   let snakeBlock = document.createElement('div');
   snakeBlock.className = 'snake-block';
@@ -21,13 +22,14 @@ function createSnakeBlock(cords) {
   document.body.append(snakeBlock);
   return snakeBlock;
 }
-function generateFoodCords(){
+
+function generateFoodCords() {
   foodCords = {
     x: (Math.floor(Math.random() * 20) * box) + offsetX,
     y: (Math.floor(Math.random() * 20) * box) + offsetTop,
   }
-  for(let i = 0; i < snake.length; i++){
-    if(foodCords.x == snake[i].x && foodCords.y == snake[i].y){
+  for (let i = 0; i < snake.length; i++) {
+    if (foodCords.x == snake[i].x && foodCords.y == snake[i].y) {
       generateFoodCords()
     }
   }
@@ -58,7 +60,6 @@ function selectDirection(e) {
       break;
   }
 }
-document.addEventListener('keydown', selectDirection);
 
 createFodd();
 
@@ -94,13 +95,12 @@ function render() {
   } else if (headY > (offsetY + offsetTop) - box) {
     headY = offsetTop;
   } else if (headY < offsetTop) {
-    headY = offsetY ;
+    headY = offsetY;
   }
   let head = {
     x: headX,
     y: headY,
   }
-  createSnakeBlock(head);
   for (let i = 0; i < snake.length; i++) {
     if (head.x == snake[i].x && head.y == snake[i].y) {
       console.log('gameover!!!');
@@ -114,10 +114,10 @@ function render() {
     document.querySelector('.snake-block').remove();
     snake.pop();
   }
+
+  createSnakeBlock(head);
   snake.unshift(head);
   scoreValueEl.innerText = score;
 }
 
 setInterval(render, 100);
-
-console.dir(document.querySelector('.border'))
