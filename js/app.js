@@ -1,5 +1,5 @@
 'use strict'
-
+console.log('op');
 const box = 30;
 const scoreValueEl = document.getElementById('scoreValue');
 const offsetX = document.querySelector('.border').offsetLeft;
