@@ -32,3 +32,23 @@ body {
 .score {
   color: white;
 }
+.d-none {
+  display: none;
+}
+
+.gameover {
+  font-size: 100px;
+  text-align: center;
+  line-height: 100vh;
+  position: relative;
+  z-index: 1000;
+}
+
+.gameover::before{
+  content: 'Game Over!!!';
+  position: absolute;
+  z-index: 1000;
+  top: -200px;
+  left: 50px;
+  color: red;
+}

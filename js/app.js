@@ -2,6 +2,8 @@
 console.log('op');
 const box = 30;
 const scoreValueEl = document.getElementById('scoreValue');
+const gameEl = document.querySelector('.border');
+const scoreEl = document.querySelector('.score');
 const offsetX = document.querySelector('.border').offsetLeft;
 const offsetY = document.querySelector('.border').offsetHeight;
 const offsetTop = document.querySelector('.border').offsetTop;
@@ -75,19 +77,15 @@ function createFodd() {
 }
 
 function selectDirection(e) {
-  switch (e.keyCode) {
-    case (37):
-      direction = 'left';
-      break;
-    case (39):
-      direction = 'right';
-      break;
-    case (38):
-      direction = 'up';
-      break;
-    case (40):
-      direction = 'down';
-      break;
+  const key = e.keyCode;
+  if(key === 37 && direction !== 'right'){
+    direction = 'left';
+  }else if(key === 39 && direction !== 'left'){
+    direction = 'right'
+  }else if(key === 38 && direction !== 'down'){
+    direction = 'up'
+  }else if(key === 40 && direction !== 'up'){
+    direction = 'down'
   }
 }
 
@@ -134,6 +132,9 @@ function render() {
   for (let i = 0; i < snake.length; i++) {
     if (head.x == snake[i].x && head.y == snake[i].y) {
       console.log('gameover!!!');
+      scoreEl.classList.add('gameover');
+      gameEl.classList.add('d-none');
+      clearInterval(game);
     }
   }
   if (head.x == foodCords.x && head.y == foodCords.y) {
@@ -150,4 +151,4 @@ function render() {
   scoreValueEl.innerText = score;
 }
 
-setInterval(render, 100);
+let game = setInterval(render, 100);
