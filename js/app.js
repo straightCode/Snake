@@ -1,5 +1,5 @@
 'use strict'
-console.log('op');
+console.log('game');
 const box = 30;
 const scoreValueEl = document.getElementById('scoreValue');
 const gameEl = document.querySelector('.border');
@@ -134,6 +134,7 @@ function render() {
       console.log('gameover!!!');
       scoreEl.classList.add('gameover');
       gameEl.classList.add('d-none');
+      document.body.classList.remove('overflow');
       clearInterval(game);
     }
   }
