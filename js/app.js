@@ -8,11 +8,41 @@ const offsetTop = document.querySelector('.border').offsetTop;
 let headX = box;
 let headY = box;
 let score = 0;
+let touchStart = {};
+let touchEnd = {};
 let direction = 'down';
 let snake = [];
 let foodCords = {}
 
 document.addEventListener('keydown', selectDirection);
+document.addEventListener('touchstart', touchstart);
+document.addEventListener('touchend', touchend);
+
+function selectDirectionTouch(){
+  const diffX = touchStart.x - touchEnd.x;
+  const diffY = touchStart.y - touchEnd.y;
+  if(diffX < -200 && Math.abs(diffX) > Math.abs(diffY)){
+    direction = 'right';
+  }else if(diffX > 200 && Math.abs(diffX) > Math.abs(diffY)){
+    direction = 'left';
+  }else if(diffY > 200 && Math.abs(diffY) > Math.abs(diffX)){
+    direction = 'up';
+  }
+  else if(diffY < -200 && Math.abs(diffY) > Math.abs(diffX)){
+    direction = 'down';
+  }
+  console.log(diffX, diffY);
+}
+
+function touchstart(e){
+  touchStart.x = e.changedTouches[0].screenX;
+  touchStart.y = e.changedTouches[0].screenY;
+}
+function touchend(e){
+  touchEnd.x = e.changedTouches[0].screenX;
+  touchEnd.y = e.changedTouches[0].screenY;
+  selectDirectionTouch();
+}
 
 function createSnakeBlock(cords) {
   let snakeBlock = document.createElement('div');
