@@ -1,5 +1,4 @@
 'use strict'
-console.log('game');
 const box = 30;
 const scoreValueEl = document.getElementById('scoreValue');
 const gameEl = document.querySelector('.border');
@@ -55,6 +54,8 @@ function createSnakeBlock(cords) {
   return snakeBlock;
 }
 
+console.log(snake);
+
 function generateFoodCords() {
   foodCords = {
     x: (Math.floor(Math.random() * 20) * box) + offsetX,
@@ -100,6 +101,15 @@ createSnakeBlock({
   x: offsetX,
   y: offsetY
 });
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
 function render() {
   switch (direction) {
@@ -150,6 +160,17 @@ function render() {
   createSnakeBlock(head);
   snake.unshift(head);
   scoreValueEl.innerText = score;
+  let blocks = document.querySelectorAll('.snake-block');
+  blocks.forEach(e => {
+    e.style.backgroundColor = 'green';
+  })
+  blocks[blocks.length - 1].style.backgroundColor = 'red';
+  
+  if(blocks.length > 3){
+    for(let i = 0; i < blocks.length - 3; i++){
+      blocks[i].style.backgroundColor = getRandomColor();
+    }
+  }
 }
 
 let game = setInterval(render, 100);
