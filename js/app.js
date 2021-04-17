@@ -167,7 +167,7 @@ function render() {
   blocks[blocks.length - 1].style.backgroundColor = 'red';
   
   if(blocks.length > 3){
-    for(let i = 0; i < blocks.length / 2; i++){
+    for(let i = 0; i < blocks.length / 3; i++){
       blocks[i].style.backgroundColor = getRandomColor();
     }
   }
