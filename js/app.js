@@ -21,14 +21,14 @@ document.addEventListener('touchend', touchend);
 function selectDirectionTouch(){
   const diffX = touchStart.x - touchEnd.x;
   const diffY = touchStart.y - touchEnd.y;
-  if(diffX < -200 && Math.abs(diffX) > Math.abs(diffY)){
+  if(diffX < -100 && Math.abs(diffX) > Math.abs(diffY)){
     direction = 'right';
-  }else if(diffX > 200 && Math.abs(diffX) > Math.abs(diffY)){
+  }else if(diffX > 100 && Math.abs(diffX) > Math.abs(diffY)){
     direction = 'left';
-  }else if(diffY > 200 && Math.abs(diffY) > Math.abs(diffX)){
+  }else if(diffY > 100 && Math.abs(diffY) > Math.abs(diffX)){
     direction = 'up';
   }
-  else if(diffY < -200 && Math.abs(diffY) > Math.abs(diffX)){
+  else if(diffY < -100 && Math.abs(diffY) > Math.abs(diffX)){
     direction = 'down';
   }
   console.log(diffX, diffY);
